@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vida, obra y legado del doctor René Favaloro, médico rural y pionero de la cirugía coronaria.">
+<title>René Favaloro | Vida, obra y legado</title>
+<style>
+  /* Identidad visual */
+  :root {
+    color-scheme: light;
+    --papel: #f7f5ee;
+    --blanco: #fffdf7;
+    --tinta: #17312d;
+    --secundario: #4c6159;
+    --verde: #23483e;
+    --acento: #a0442d;
+    --linea: #d8ddd1;
+    --claro: #dbe8d9;
+    --serif: Georgia, 'Times New Roman', serif;
+    --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--papel); color: var(--tinta); font: 1rem/1.65 var(--sans); }
+  a { color: inherit; text-underline-offset: .25em; }
+  a:focus-visible { outline: 3px solid currentColor; outline-offset: 5px; }
+  .wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+  .skip { position: absolute; inset: .5rem auto auto .5rem; background: var(--blanco); padding: .6rem; transform: translateY(-150%); z-index: 1; }
+  .skip:focus { transform: none; }
+  .masthead { border-bottom: 1px solid var(--linea); }
+  .masthead .wrap { display: flex; justify-content: space-between; align-items: center; gap: .75rem 2rem; padding-block: 1rem; flex-wrap: wrap; }
+  .brand { font: bold 1.25rem var(--serif); text-decoration: none; }
+  nav ul { display: flex; flex-wrap: wrap; gap: .45rem 1.25rem; padding: 0; margin: 0; list-style: none; }
+  nav a { font-size: .875rem; font-weight: 650; text-decoration: none; }
+  nav a:hover, .brand:hover { text-decoration: underline; }
+  h1, h2, h3, p { margin: 0; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: normal; line-height: 1.06; }
+  h1 { font-size: clamp(3.6rem, 8vw, 7.6rem); letter-spacing: -.075em; }
+  h2 { font-size: clamp(2.45rem, 5vw, 4.3rem); letter-spacing: -.05em; }
+  h3 { font-size: 1.65rem; letter-spacing: -.025em; }
+  .eyebrow { color: var(--acento); font-size: .76rem; font-weight: 750; text-transform: uppercase; letter-spacing: .14em; }
+  .hero { min-height: 550px; padding-block: clamp(3rem, 7vw, 6rem); display: grid; grid-template-columns: 1.2fr .85fr; align-items: center; gap: clamp(2rem, 6vw, 5rem); }
+  .hero h1 { margin-block: .8rem 1.2rem; }
+  .tagline { font: italic clamp(1.45rem, 3vw, 2.1rem)/1.2 var(--serif); margin-bottom: 1rem; }
+  .description { max-width: 47ch; color: var(--secundario); }
+  .button { display: inline-flex; align-items: center; gap: 1rem; margin-top: 1.6rem; padding: .75rem 1.15rem; background: var(--verde); color: var(--blanco); text-decoration: none; font-weight: 650; border-radius: .25rem; }
+  .button:hover { background: var(--tinta); }
+  .plate { display: flex; flex-direction: column; justify-content: space-between; position: relative; isolation: isolate; overflow: hidden; aspect-ratio: 1 / 1.02; margin: 0; padding: clamp(1.15rem, 3.5vw, 2.15rem); border-radius: .25rem; color: var(--blanco); background: var(--verde); }
+  .plate::before, .plate::after { content: ''; position: absolute; z-index: -1; width: 88%; aspect-ratio: 1; right: -15%; top: -12%; border: 1px solid #adc6ae55; border-radius: 50%; }
+  .plate::after { width: 74%; right: -8%; top: -5%; box-shadow: 0 0 0 1.5rem #adc6ae12, 0 0 0 3rem #adc6ae0c; }
+  .plate .eyebrow { color: var(--claro); }
+  .year { font: clamp(4.3rem, 10vw, 9rem)/1 var(--serif); letter-spacing: -.09em; }
+  .plate-caption { border-top: 1px solid #adc6ae77; padding-top: .8rem; font-size: .9rem; }
+  .section { padding-block: clamp(3.5rem, 8vw, 6rem); border-top: 1px solid var(--linea); }
+  .section h2 { margin-bottom: 1.3rem; }
+  .split { display: grid; grid-template-columns: .85fr 1.15fr; gap: 1rem 4rem; }
+  .prose { max-width: 62ch; }
+  .prose p + p { margin-top: 1rem; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.75rem; }
+  .card { background: var(--blanco); border: 1px solid var(--linea); border-radius: .25rem; padding: 1.5rem; }
+  .card h3 { margin-bottom: .65rem; }
+  .card p, .timeline p { color: var(--secundario); }
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li { display: grid; grid-template-columns: minmax(5.5rem, 20%) 1fr; gap: .7rem 1.25rem; border-top: 1px solid var(--linea); padding-block: 1.2rem; }
+  .timeline h3 { margin-bottom: .45rem; }
+  .timeline .eyebrow { padding-top: .25rem; }
+  .legacy { background: var(--verde); color: var(--blanco); }
+  .legacy .prose { color: var(--claro); }
+  footer { padding-block: 2.5rem; }
+  footer h2 { font-size: 1.7rem; letter-spacing: -.02em; }
+  .sources { display: flex; flex-wrap: wrap; gap: .55rem 1.4rem; list-style: none; margin: 1rem 0; padding: 0; }
+  .sources a:hover { color: var(--acento); }
+  @media (max-width: 760px) {
+    .hero, .split { grid-template-columns: 1fr; }
+    .hero { min-height: 0; }
+    .plate { aspect-ratio: 1.55; max-width: 31rem; }
+    .cards { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 390px) {
+    .wrap { width: calc(100% - 2rem); }
+    nav ul { gap: .35rem .85rem; }
+    .timeline li { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<header class="masthead" id="inicio">
+  <div class="wrap">
+    <a class="brand" href="#inicio">René Favaloro</a>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#biografia">Biografía</a></li>
+        <li><a href="#trayectoria">Trayectoria</a></li>
+        <li><a href="#intereses">Intereses</a></li>
+        <li><a href="#legado">Legado</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="contenido">
+  <!-- Presentación -->
+  <section class="hero wrap" aria-labelledby="titulo">
+    <div>
+      <p class="eyebrow">Médico y cirujano argentino · 1923–2000</p>
+      <h1 id="titulo">René<br>Favaloro</h1>
+      <p class="tagline">Una vida al servicio de la medicina.</p>
+      <p class="description">De la medicina rural en La Pampa a la cirugía cardiovascular en Cleveland, hizo de la atención al paciente, la enseñanza y la investigación el centro de su trabajo.</p>
+      <a class="button" href="#trayectoria">Recorrer su trayectoria <span aria-hidden="true">↓</span></a>
+    </div>
+    <figure class="plate">
+      <p class="eyebrow">Cleveland, Ohio</p>
+      <p class="year">1967</p>
+      <figcaption class="plate-caption">Un año decisivo para el bypass coronario</figcaption>
+    </figure>
+  </section>
+
+  <!-- Biografía y áreas de trabajo -->
+  <section id="biografia" class="section">
+    <div class="wrap split">
+      <h2>René Favaloro</h2>
+      <div class="prose">
+        <p>René Gerónimo Favaloro nació el 12 de julio de 1923 en el barrio El Mondongo, en La Plata. Se recibió de médico en 1949 en la Universidad Nacional de La Plata y realizó su formación hospitalaria en el Policlínico de esa ciudad.</p>
+        <p>En Jacinto Aráuz, La Pampa, ejerció la medicina rural junto a su hermano Juan José. Allí combinó la atención cotidiana con el trabajo comunitario en prevención y educación para la salud.</p>
+      </div>
+    </div>
+  </section>
+  <section id="conocimientos" class="section">
+    <div class="wrap">
+      <h2>Conocimientos y habilidades</h2>
+      <div class="cards">
+        <article class="card"><h3>Medicina rural</h3><p>Atención clínica, trabajo comunitario y educación sanitaria.</p></article>
+        <article class="card"><h3>Cirugía cardiovascular</h3><p>Formación en cirugía torácica y cardiovascular. Desarrolló y sistematizó el uso de la vena safena en el bypass coronario.</p></article>
+        <article class="card"><h3>Docencia e investigación</h3><p>Formó residentes, publicó trabajos científicos e impulsó equipos que integraban la investigación con la práctica clínica.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trayectoria -->
+  <section id="trayectoria" class="section">
+    <div class="wrap split">
+      <h2>Trayectoria</h2>
+      <ol class="timeline">
+        <li><p class="eyebrow">1949</p><div><h3>Formación en La Plata</h3><p>Obtuvo el título de médico y se formó en cirugía general en el Hospital Policlínico.</p></div></li>
+        <li><p class="eyebrow">1950–1962</p><div><h3>Medicina en Jacinto Aráuz</h3><p>Atendió a la comunidad pampeana y contribuyó a mejorar sus recursos asistenciales.</p></div></li>
+        <li><p class="eyebrow">1967</p><div><h3>Bypass coronario en Cleveland</h3><p>En la Cleveland Clinic realizó una intervención exitosa utilizando la vena safena. El bypass crea una vía alternativa para que la sangre llegue al músculo cardíaco cuando una arteria coronaria está estrechada u obstruida.</p></div></li>
+        <li><p class="eyebrow">1971–1975</p><div><h3>Regreso a la Argentina</h3><p>Regresó en 1971 y trabajó en el Sanatorio Güemes. En 1975, junto con su equipo, creó la Fundación Favaloro para la Docencia y la Investigación Médica.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Intereses y legado -->
+  <section id="intereses" class="section">
+    <div class="wrap split">
+      <h2>Intereses</h2>
+      <div class="prose">
+        <p>Le interesaba la historia argentina, en particular la vida y el pensamiento de José de San Martín. A ese tema dedicó, entre otros trabajos, el libro <cite>¿Conoce usted a San Martín?</cite></p>
+        <p>En su labor médica, la prevención, la educación y la formación de nuevos profesionales ocuparon un lugar central.</p>
+      </div>
+    </div>
+  </section>
+  <section id="legado" class="section legacy">
+    <div class="wrap split">
+      <h2>Su legado</h2>
+      <div class="prose">
+        <p><strong>En la medicina.</strong> La sistematización del bypass con vena safena marcó un hito en el tratamiento quirúrgico de la enfermedad coronaria. La Fundación Favaloro dio continuidad al trabajo que inició en asistencia, docencia e investigación.</p>
+        <p><strong>En lo humano.</strong> Su experiencia como médico rural y su compromiso con el acceso a la salud muestran cómo entendía la profesión: con responsabilidad hacia los pacientes y las comunidades a las que pertenecen.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="wrap">
+  <h2>Fuentes</h2>
+  <ul class="sources">
+    <li><a href="https://www.fundacionfavaloro.org/biografia/">Biografía</a></li>
+    <li><a href="https://www.fundacionfavaloro.org/curriculum-vitae/">Currículum</a></li>
+    <li><a href="https://www.fundacionfavaloro.org/historia/">Historia de la Fundación</a></li>
+    <li><a href="https://www.fundacionfavaloro.org/el-legado-cientifico/">Legado científico</a></li>
+    <li><a href="https://www.fundacionfavaloro.org/bibliografia/">Bibliografía</a></li>
+  </ul>
+  <a href="#inicio">Volver al inicio ↑</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mi huerta mes a mes</title>
+<style>
+:root{color-scheme:light;--ink:#182d24;--muted:#506057;--paper:#f7f6ef;--line:#d8ddd1;--green:#205943;--s:#cfe6c5;--t:#ffe1a5;--c:#dfd6f0}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,sans-serif}header{background:#153e30;color:#fff;padding:clamp(30px,6vw,72px) 20px 32px}header div,main{max-width:1140px;margin:auto}header p{margin:0;color:#d0e5d7}h1{font:700 clamp(38px,7vw,76px)/1 Georgia,serif;margin:0 0 16px}main{padding:24px 18px 40px}h2,h3{line-height:1.2}h2{font-family:Georgia,serif;font-size:clamp(26px,4vw,37px);margin:0 0 10px}h3{margin:0}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:clamp(14px,3vw,25px);margin-bottom:24px}.selectors,.columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.selectors label{font-weight:650;display:block}select,button{font:inherit;color:inherit;border:1px solid #9daea2;border-radius:9px;background:white;padding:9px 12px}select{width:100%;margin-top:5px}button{cursor:pointer;font-weight:650}button:disabled{cursor:default;opacity:.55}button:hover:not(:disabled){background:#e8f1e8}button.primary{background:var(--green);color:white;border-color:var(--green)}button.primary:hover:not(:disabled){background:#153e30}a{color:var(--green)}:focus-visible{outline:3px solid #3865ac;outline-offset:3px}fieldset{border:0;padding:0;margin:16px 0 0}legend{font-weight:650;margin-bottom:4px}.checks,.toolbar,.section-head,.legend{display:flex;gap:8px 12px;flex-wrap:wrap;align-items:center}.checks label{background:#eef2ea;border-radius:9px;padding:5px 8px;cursor:pointer}.checks input{accent-color:var(--green)}.toolbar{margin-top:14px}.section-head{justify-content:space-between;margin-bottom:10px}.section-head h2{margin:0}.muted{color:var(--muted)}.error{color:#a02823;font-weight:650;display:block}.error:empty{display:none}.notice{margin:0 0 20px;border-left:4px solid #869f64;padding:9px 12px;background:#edf1e4}.lane{min-width:0;background:#eff2eb;border-radius:14px;padding:12px}.lane h3{padding:10px;border-radius:8px;margin-bottom:10px}.s{background:var(--s)}.t{background:var(--t)}.c{background:var(--c)}.card{background:white;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;padding:8px;display:flex;align-items:flex-start;gap:4px}.card:last-child{margin-bottom:0}.card .detail{flex:1;min-width:0;text-align:left;border:0;padding:5px;overflow-wrap:anywhere}.card small{display:block;font-weight:400;color:var(--muted)}.star{font-size:20px;line-height:1;padding:7px;color:#715000}.flags{color:#73440a!important}.monthly{margin-bottom:28px}.legend span{padding:3px 8px;border-radius:5px}.table-wrap{overflow:auto;margin-top:12px}table{border-collapse:collapse;width:100%;min-width:680px}th,td{text-align:center;padding:4px;border:1px solid var(--line)}th[scope=row]{text-align:left;min-width:135px;background:white}.bars{display:grid;grid-template-rows:repeat(3,1fr);gap:2px;min-height:30px}.bar{display:block;border-radius:2px;font-size:10px;font-weight:700;line-height:11px}.empty{color:var(--muted);padding:2px 4px}.sources{font-size:.92rem}dialog{max-width:640px;width:calc(100% - 26px);max-height:90vh;padding:22px;border:1px solid var(--line);border-radius:16px;color:var(--ink)}dialog::backdrop{background:#132c23a6}.dialog-head{display:flex;justify-content:space-between;gap:10px;align-items:start}dl{display:grid;grid-template-columns:minmax(100px,35%) 1fr;gap:7px;margin-bottom:0}dt{font-weight:650}dd{margin:0}.print-only{display:none}
+@media(max-width:680px){.selectors,.columns{grid-template-columns:1fr}.checks{gap:6px}.section-head{align-items:flex-start}.section-head button{font-size:.9rem}.card .detail{padding:8px}.table-wrap:focus-visible{outline-offset:0}}
+@media print{@page{margin:12mm}*{print-color-adjust:exact;-webkit-print-color-adjust:exact}body{background:white;font-size:10pt}header,.filters,.sources,button,dialog,.screen-only{display:none!important}main{max-width:none;padding:0}.print-only{display:block}.columns{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.lane,.panel{padding:5px}.card{break-inside:avoid;display:block}.card .detail{display:block!important;padding:0;font-size:10pt}.card .star{display:none}.notice{margin:8px 0}.table-wrap{overflow:visible}table{min-width:0;font-size:8pt}th,td{padding:2px}th[scope=row]{min-width:0}tr{break-inside:avoid}body[data-print=month] .annual,body[data-print=annual] .monthly{display:none}.annual{border:0}}
+</style>
+</head>
+<body>
+<header><div><h1>Mi huerta mes a mes</h1><p>Calendario de siembra, trasplante y cosecha para Argentina</p></div></header>
+<main>
+<section class="panel filters" aria-labelledby="filters-title">
+<h2 id="filters-title">Elegí qué querés planificar</h2>
+<form id="filters" autocomplete="off" novalidate>
+<div class="selectors">
+<div><label for="region">Región</label><select id="region" required aria-describedby="region-error"></select><span class="error" id="region-error"></span></div>
+<div><label for="month">Mes</label><select id="month" required aria-describedby="month-error"></select><span class="error" id="month-error"></span></div>
+<div><label for="space">Espacio disponible</label><select id="space" required aria-describedby="space-error"></select><span class="error" id="space-error"></span></div>
+</div>
+<fieldset aria-describedby="types-error"><legend>Tipo de cultivo</legend><div class="checks" id="types"></div><span class="error" id="types-error"></span></fieldset>
+<div class="toolbar"><button type="button" id="all">Ver todos los tipos</button><button type="button" id="example">Cargar ejemplo para mi cantero</button></div>
+</form>
+</section>
+<p class="notice">Las fechas son orientativas y varían según el clima de cada lugar.</p>
+<section class="monthly" aria-labelledby="monthly-title">
+<div class="section-head"><h2 id="monthly-title">Calendario del mes</h2><button class="primary" id="print-month">Imprimir calendario del mes</button></div>
+<p id="month-summary" class="muted" aria-live="polite"></p>
+<div id="columns" class="columns"></div>
+<p class="muted">La cosecha del mes supone una siembra previa. «Almácigo» significa empezar en una bandeja o recipiente y luego llevar el plantín al cantero.</p>
+</section>
+<section class="annual panel" aria-labelledby="annual-title">
+<div class="section-head"><h2 id="annual-title">Calendario anual de mis cultivos</h2><button class="primary" id="print-year">Imprimir calendario anual de mis cultivos</button></div>
+<p id="annual-summary" class="muted"></p>
+<p class="muted screen-only">Marcá una estrella en cualquier tarjeta. Los cultivos elegidos se conservan mientras esta página siga abierta y el calendario se ajusta a la región seleccionada.</p>
+<div class="legend"><span class="s">S · Siembra</span><span class="t">T · Trasplante</span><span class="c">C · Cosecha</span><span>✳ · Requiere invernadero o ambiente protegido</span></div>
+<div class="table-wrap" id="annual-table" tabindex="0" role="region" aria-label="Tabla anual desplazable"></div>
+</section>
+<footer class="sources">
+<h3>Referencias y criterios</h3>
+<p>Las fichas combinan el planificador de ProHuerta, las cartillas del INTA y estimaciones de cultivo. Las ventanas regionales son adaptaciones orientativas por tolerancia al frío y al calor. Las ventanas de cosecha se calculan desde la siembra o se indican para plantas establecidas. Las macetas se indican por planta, con drenaje. Los datos de asociaciones que no están respaldados se muestran como «Sin dato específico».</p>
+<ul>
+<li><a href="https://www.argentina.gob.ar/sites/default/files/2023/09/02inta_planifica_tu_huerta.pdf" target="_blank" rel="noopener">INTA · Planificador ProHuerta</a></li>
+<li><a href="https://www.argentina.gob.ar/sites/default/files/2023/08/script-tmp-huerta_organica.pdf" target="_blank" rel="noopener">INTA · La huerta orgánica y adaptación regional</a></li>
+<li><a href="https://www.argentina.gob.ar/inta/servicio-de-atencion-ciudadana/huertas" target="_blank" rel="noopener">INTA · Materiales de huerta y aromáticas</a></li>
+<li><a href="https://repositorio.inta.gob.ar/bitstream/handle/20.500.12123/15587/INTA_Prohuerta_DeLuca_L_Apuntes_t%C3%A9cnicos_vivero_familiar.pdf?sequence=1" target="_blank" rel="noopener">INTA · Apuntes técnicos de vivero familiar</a></li>
+<li><a href="https://repositorio.inta.gob.ar/bitstream/handle/20.500.12123/24258/INTA_CRMendoza-SanJuan_EEASanJuan_Martini_MC_Arom%C3%A1ticas_san_juan_estrategia_trabajo.pdf?sequence=1" target="_blank" rel="noopener">INTA San Juan · Multiplicación de aromáticas en Cuyo</a></li>
+<li><a href="https://repositoriosdigitales.sicyt.gob.ar/vufind/Record/INTADig_c58f148d4b42d02a91ed544ce1c06a01" target="_blank" rel="noopener">INTA · Calendario de cultivo a campo para el norte de la Patagonia</a></li>
+</ul>
+</footer>
+</main>
+<dialog id="crop-dialog" aria-labelledby="crop-title"><div class="dialog-head"><h2 id="crop-title"></h2><form method="dialog"><button>Cerrar</button></form></div><div id="crop-info"></div></dialog>
+<script>
+'use strict';
+const months = 'Enero Febrero Marzo Abril Mayo Junio Julio Agosto Septiembre Octubre Noviembre Diciembre'.split(' ');
+const regions = ['Pampeana / Centro','NOA','NEA','Cuyo','Patagonia norte','Patagonia sur'];
+const spaces = ['Macetas o balcón','Huerta chica','Huerta grande'];
+const types = ['Hortalizas de hoja','Raíces y bulbos','Frutos','Aromáticas','Flores amigas de la huerta'];
+// Nombre | tipo 0–4 | sensible al frío C (cálido), F (fresco), R (rústico)
+// Siembra directa | almácigo | trasplante | días desde siembra | separación cm
+// Profundidad cm | riego | maceta litros mínimos (0: no recomendada) | asociación favorable | precaución | consejo
+const rows = `
+Albahaca|3|C|9-11|8|10-12|80-100|20-25|0,5|regular|5|Tomate, zanahoria, lechuga y rabanito||Sembrá en tierra templada, cuando ya no haya riesgo de heladas. Cortá las puntas para que ramifique.
+Perejil|3|R|9-11,2-4|||75-90|10-15|0,5-1|regular|4|Tomate||Mantené húmeda la superficie hasta que brote. La germinación puede ser lenta.
+Cilantro|3|F|3-5,8-10|||40-60|10-15|1-2|regular|5|||Sembralo en el lugar definitivo. Con calor tiende a florecer antes de dar muchas hojas.
+Eneldo|3|F|9-11|||40-60|20-30|0,5-1|regular|8|||Sembralo directo y escaloná las siembras. La estimación corresponde al primer corte de hojas.
+Orégano|3|R||9-11|10-12|90-150|25-35|superficial|bajo|7|||Usá un rincón soleado y bien drenado. También podés partir de una división de mata.
+Tomillo|3|R||9-11|10-12|120-180|20-30|superficial|bajo|5|||Usá suelo liviano. También se multiplica por esqueje.
+Romero|3|R||9-11|10-12|180-365|60-100|0,5|bajo|20|||La semilla es lenta. Para empezar en el cantero, un plantín o esqueje enraizado es más práctico.
+Salvia común|3|R||9-11|10-12|90-150|40-60|0,5|bajo|12|||Elegí un lugar que drene bien. También se multiplica por estaca.
+Melisa|3|R||9-11|10-12|90-150|35-50|superficial|regular|10|||También se puede multiplicar por división de mata.
+Ciboulette|3|R|9-11,3-4|8-10|10-12|80-120|15-20|0,5-1|regular|4|||Cortá algunas hojas por vez y dejá el centro para que rebrote.
+Manzanilla|3|F|9-11|||70-100|20-25|superficial|regular|5|||Presioná las semillas contra el suelo húmedo. Cosechá las flores abiertas.
+Mejorana|3|C||9-10|10-12|90-120|20-30|superficial|bajo|5|||Protegela de las heladas. Cortá puntas tiernas una vez establecida.
+Acelga|0|R|2-6,8-12|||50-70|15-20|2|regular|12|Lechuga, escarola y maíz||Cortá primero las hojas exteriores.
+Lechuga|0|R|2-11|2-11|3-12|50-80|20-30|0,5|regular|4|Acelga, rabanito y zanahoria||Elegí una variedad adaptada a la estación.
+Espinaca|0|F|2-6,8-9|||45-60|10-15|1-2|regular|4|Repollo, brócoli y remolacha||Preferí tiempo fresco para que no se espigue.
+Escarola|0|F||2-3|3-5|60-80|20-25|0,5|regular|6|Acelga y ajo||Trasplantá con el pan de tierra.
+Rúcula|0|R|2-11|||30-45|10-15|0,5-1|regular|3|||Escaloná las siembras para tener hojas tiernas.
+Repollo|0|F||2-3,8-9|3-4,9-10|90-130|35-45|1|regular|20|Lechuga y espinaca||Dejá espacio para que se forme la cabeza.
+Brócoli|0|F||4-7|6-8|80-120|40-50|1|regular|20|Espinaca y remolacha||Cortá la cabeza antes de que abra la flor.
+Kale|0|F|2-5|2-5,8-9|3-6,9-10|60-90|35-45|1|regular|18|||Cosechá desde las hojas exteriores.
+Apio|0|F||9-12,1-3|10-2,3-5|120-150|20-25|superficial|alto|12|Raíces y bulbos||No dejes que el sustrato se seque.
+Zanahoria|1|R|2-6,8-12|||90-110|5-8|0,5-1|regular|8|Lechuga y albahaca||Aflojá el suelo y raleá cuando salgan las primeras hojas.
+Remolacha|1|R|2-6,8-11|||85-130|10-15|2|regular|8|Brócoli y espinaca||Raleá si brota más de una planta por semilla.
+Rabanito|1|R|2-11|||25-35|5-10|1|regular|3|Lechuga y albahaca||Cosechá a tiempo para que no se ponga fibroso.
+Ajo|1|R|3-5|||180-270|10-15|3-5|moderado|5|Lechuga, escarola y acelga||Plantá un diente con la punta hacia arriba.
+Cebolla|1|F||2-4|5-7|150-240|8-12|1|moderado|5|||Elegí una variedad adaptada al largo del día de tu zona.
+Puerro|1|F||2-4|5-7|120-150|10-15|1|regular|7|||Arrimá tierra a la base a medida que crece si querés blanquearla.
+Nabo|1|F|2-5,8-9|||45-70|10-15|1-2|regular|6|||Sembrá directo y raleá si quedan muy juntos.
+Tomate|2|C||8-10|10-12|120-160|45-60|0,5-1|regular|25|Albahaca y perejil||Usá tutor y regá al pie.
+Pimiento|2|C||8-9|10-12|140-180|40-50|0,5-1|regular|18|||Dale el rincón más cálido y esperá a que pasen las heladas para trasplantar.
+Berenjena|2|C||8-9|10-11|140-170|50-60|0,5-1|regular|25|Poroto y caléndula||Empezá en un almácigo cálido y trasplantá con suelo templado.
+Zapallito|2|C|10-12|9-10|10-11|55-75|70-100|2-3|alto|35|||Cosechá tierno y dejá que la planta tenga aire.
+Zapallo rastrero|2|C|10-12|||100-150|100-200|3-4|regular|0|Maíz y poroto||Dejá lugar para las guías largas.
+Pepino|2|C|10-12|9-10|10-11|60-85|40-60|2-3|alto|22|||Puede crecer en un tutor firme para ocupar menos lugar.
+Melón|2|C|10-11|||95-120|80-120|2-3|regular|0|Maíz y acelga||Elegí un lugar cálido con espacio para las guías.
+Poroto chaucha|2|C|10-1|||55-85|15-25|3-4|regular|12|Maíz y zapallo||Si es trepador, armá el tutor antes de sembrar.
+Arveja|2|F|3-8|||90-150|5-10|3-5|regular|10|Repollo y zanahoria||Agregá un soporte si sembrás una variedad trepadora.
+Maíz dulce|2|C|10-12|||85-120|25-35|3-5|alto|0|Poroto y zapallo||Sembrá varias hileras cortas juntas para favorecer la polinización.
+Caléndula|4|F|3-5,8-10|8-9|9-10|60-85|25-35|1-2|moderado|6|Berenjena||Dejá flores abiertas para que las visiten los insectos.
+Copete (tagete)|4|C|10-12|9-10|10-12|60-90|20-30|0,5-1|moderado|5|||La fecha de cosecha indica el comienzo estimado de la floración.
+Capuchina (taco de reina)|4|C|9-11,2-3|||55-80|30-45|1-2|moderado|12|||La fecha de cosecha indica el comienzo estimado de la floración.
+Girasol|4|C|10-12|||70-110|30-60|2-3|moderado|0|||La fecha de cosecha indica el comienzo de floración; la semilla madura después.
+Zinnia|4|C|10-12|9-10|10-12|60-90|25-35|0,5-1|moderado|7|||Dejá aire entre plantas y regá al pie.
+`.trim().split('\n');
+
+const $ = id => document.getElementById(id);
+const formatDate = new Intl.DateTimeFormat('es-AR', {day:'2-digit',month:'2-digit',year:'numeric'});
+const formatNumber = new Intl.NumberFormat('es-AR');
+const monthNumber = n => (n + 11) % 12 + 1;
+const monthRange = (start, end) => Array.from({length:(end - start + 12) % 12 + 1}, (_, index) => monthNumber(start + index));
+const monthList = value => [...new Set(value ? value.split(',').flatMap(part => {
+  const [start, end = start] = part.split('-').map(Number);
+  return monthRange(start, end);
+}) : [])].sort((a,b) => a-b);
+
+const partialShade = new Set(['Perejil','Melisa','Ciboulette','Lechuga','Acelga','Rúcula','Espinaca','Escarola']);
+const established = {
+  'Orégano':'10-4','Tomillo':'10-4','Romero':'9-5','Salvia común':'10-4','Melisa':'10-4','Ciboulette':'9-5'
+};
+const potDepth = {'Zanahoria':30,'Remolacha':25,'Tomate':35,'Pimiento':30,'Berenjena':35,'Zapallito':35,'Pepino':30,'Romero':30,'Puerro':25};
+const avoid = {
+  'Romero':'Melisa o apio en el mismo sector de riego, porque necesitan más humedad.',
+  'Tomillo':'Apio en el mismo sector de riego, porque necesita más humedad.',
+  'Orégano':'Apio en el mismo sector de riego, porque necesita más humedad.',
+  'Apio':'Romero, tomillo u orégano en el mismo sector de riego.',
+  'Melisa':'Romero en el mismo sector de riego, porque prefiere suelo más seco.'
+};
+const catalog = rows.map((row, id) => {
+  const [name,type,climate,direct,seedbed,transplant,days,spacing,depth,water,pot,companions,,tip] = row.split('|');
+  return {id,name,type:Number(type),climate,direct:monthList(direct),seedbed:monthList(seedbed),
+    transplant:monthList(transplant),days:days.split('-').map(Number),spacing,depth,water,pot:Number(pot),
+    companions:companions || 'Sin dato específico.',avoid:avoid[name] || 'Sin dato específico.',tip,
+    sun:partialShade.has(name) ? 'Sol o media sombra luminosa' : 'Sol directo',
+    established:monthList(established[name])};
+}).sort((a,b) => a.name.localeCompare(b.name,'es-AR'));
+const favorites = new Set();
+const actions = [
+  {key:'s',title:'Sembrar ahora',label:'Siembra',empty:'Probá otro mes o activá más tipos de cultivo.'},
+  {key:'t',title:'Trasplantar ahora',label:'Trasplante',empty:'Probá los meses cercanos o revisá las fichas de siembra.'},
+  {key:'c',title:'Cosechar ahora',label:'Cosecha',empty:'Probá otro mes. Las cosechas dependen de siembras anteriores.'}
+];
+
+function addDays(date, days) {
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate() + days, 12);
+}
+
+function harvestMonths(sowing, days) {
+  const result = new Set();
+  for (const month of sowing) {
+    const early = addDays(new Date(2024, month-1, 1, 12), days[0]);
+    const late = addDays(new Date(2024, month, 0, 12), days[1]);
+    const cursor = new Date(early.getFullYear(), early.getMonth(), 1, 12);
+    while (cursor <= late) {
+      result.add(cursor.getMonth()+1);
+      cursor.setMonth(cursor.getMonth()+1);
+    }
+  }
+  return [...result].sort((a,b) => a-b);
+}
+
+const summerRest = [12,1,2];
+const northCold = [5,6,7,8];
+const southCold = [4,5,6,7,8,9];
+const shortSeason = new Set(['Zapallo rastrero','Melón','Maíz dulce','Pimiento','Berenjena']);
+const calendars = regions.map((_, region) => new Map(catalog.map(crop => [crop.id, regionalCalendar(crop,region)])));
+
+function regionalCalendar(crop, region) {
+  const winter = region === 4 ? northCold : region === 5 ? southCold : [];
+  const warm = crop.climate === 'C';
+  const cool = crop.climate === 'F';
+  const shift = region === 1 || region === 2 ? (warm ? -1 : cool ? 1 : 0) :
+    region >= 4 ? (warm ? 1 : 0) : 0;
+  function adapt(base, activity) {
+    let adjusted = base.map(month => monthNumber(month + shift));
+    if ((region === 1 || region === 2) && !warm) adjusted = adjusted.filter(month => !summerRest.includes(month));
+    if (region === 2 && warm && activity !== 'seedbed') adjusted = adjusted.filter(month => month !== 1);
+    if (region === 3) {
+      const seasonal = {'Perejil':'3-5','Cilantro':'3-5','Orégano':'3-5','Tomillo':'3-5','Salvia común':'3-5'};
+      if (seasonal[crop.name] && activity !== 'transplant') adjusted = base.length ? monthList(seasonal[crop.name]) : [];
+      if (seasonal[crop.name] && activity === 'transplant' && base.length) adjusted = monthList('4-6');
+      if (warm && activity !== 'seedbed') adjusted = adjusted.filter(month => month !== 9);
+    }
+    return [...new Set(adjusted)].sort((a,b) => a-b);
+  }
+  const direct = adapt(crop.direct,'direct');
+  const seedbed = adapt(crop.seedbed,'seedbed');
+  const transplant = adapt(crop.transplant,'transplant');
+  const s = [...new Set([...direct,...seedbed])].sort((a,b) => a-b);
+  const harvest = crop.established.length && region >= 4 ? crop.established.filter(month => !winter.includes(month)) : crop.established;
+  const c = crop.established.length ? harvest : harvestMonths(s,crop.days);
+  const needsProtection = (month, activity) => region >= 4 &&
+    (winter.includes(month) && (warm || region === 5 || activity === 'seedbed') ||
+    region === 5 && warm && shortSeason.has(crop.name));
+  return {direct,seedbed,s,t:transplant,c,needsProtection};
+}
+
+function options(id, values, increment = 0) {
+  $(id).innerHTML = values.map((value,index) => '<option value="'+(index+increment)+'">'+value+'</option>').join('');
+}
+options('region',regions);
+options('month',months,1);
+options('space',spaces);
+$('types').innerHTML = types.map((type,index) => '<label><input type="checkbox" value="'+index+'"> '+type+'</label>').join('');
+const checks = [...$('types').querySelectorAll('input')];
+
+function fillExample() {
+  $('region').value = '0';
+  $('month').value = new Date().getMonth()+1;
+  $('space').value = '1';
+  checks.forEach(input => {input.checked = input.value === '3';});
+  render();
+}
+function changeError(id, message) {
+  $(id+'-error').textContent = message;
+  if (id !== 'types') $(id).setAttribute('aria-invalid',String(Boolean(message)));
+}
+function readFilters() {
+  const fields = [['region',regions.length,0,'Elegí una región.'],['month',12,1,'Elegí un mes.'],['space',spaces.length,0,'Elegí el espacio disponible.']];
+  const selected = {};
+  let valid = true;
+  for (const [id,count,minimum,error] of fields) {
+    const value = $(id).value;
+    const allowed = value !== '' && Number.isInteger(Number(value)) && Number(value) >= minimum && Number(value) < minimum+count;
+    changeError(id,allowed ? '' : error);
+    valid = valid && allowed;
+    selected[id] = Number(value);
+  }
+  selected.types = checks.filter(input => input.checked).map(input => Number(input.value));
+  changeError('types', selected.types.length ? '' : 'Marcá al menos un tipo de cultivo para ver opciones.');
+  selected.validRegion = $('region').getAttribute('aria-invalid') === 'false';
+  selected.valid = valid && selected.types.length > 0;
+  return selected;
+}
+
+function starredButton(crop) {
+  const marked = favorites.has(crop.id);
+  return '<button type="button" class="star" data-star="'+crop.id+'" aria-pressed="'+marked+
+    '" aria-label="Marcar con estrella: '+crop.name+'" title="Marcar con estrella">'+(marked ? '★' : '☆')+'</button>';
+}
+
+function activityLabel(calendar, month, action) {
+  if (action === 't') return 'Llevá el plantín al lugar definitivo';
+  if (action === 'c') return 'Si lo sembraste con anticipación';
+  const direct = calendar.direct.includes(month);
+  const seedbed = calendar.seedbed.includes(month);
+  return direct && seedbed ? 'Siembra directa o en almácigo' : direct ? 'Siembra directa' : 'Siembra en almácigo';
+}
+
+function isProtected(calendar,month,action) {
+  if (action !== 's') return calendar.needsProtection(month,action);
+  return (calendar.direct.includes(month) && calendar.needsProtection(month,'direct')) ||
+    (calendar.seedbed.includes(month) && calendar.needsProtection(month,'seedbed'));
+}
+function protectionLabel(calendar,month,action) {
+  if (action === 's' && calendar.direct.includes(month) && !calendar.needsProtection(month,'direct')) {
+    return 'El almácigo requiere ambiente protegido';
+  }
+  return 'Requiere invernadero o ambiente protegido';
+}
+
+function render() {
+  const filter = readFilters();
+  const calendar = calendars[filter.region];
+  const crops = filter.valid ? catalog.filter(crop => filter.types.includes(crop.type) && (filter.space !== 0 || crop.pot)) : [];
+  const groups = actions.map(({key}) => crops.filter(crop => calendar.get(crop.id)[key].includes(filter.month)));
+  const activeCount = new Set(groups.flat()).size;
+  $('print-month').disabled = !activeCount;
+  $('month-summary').textContent = !filter.valid ? 'Revisá los filtros para ver el calendario.' :
+    months[filter.month-1]+' · '+regions[filter.region]+' · '+spaces[filter.space]+' · '+
+    (activeCount ? formatNumber.format(activeCount)+(activeCount === 1 ? ' cultivo con tareas' : ' cultivos con tareas') :
+    'No hay tareas con estos filtros. Probá otro mes, ampliá los tipos o revisá el espacio elegido.');
+  $('columns').innerHTML = actions.map(({key,title,empty},index) => {
+    const cards = groups[index].map(crop => {
+      const dates = calendar.get(crop.id);
+      const protection = isProtected(dates,filter.month,key) ?
+        '<small class="flags">✳ '+protectionLabel(dates,filter.month,key)+'</small>' : '';
+      return '<article class="card"><button type="button" class="detail" data-crop="'+crop.id+'">'+crop.name+
+        '<small>'+activityLabel(dates,filter.month,key)+'</small>'+protection+'</button>'+starredButton(crop)+'</article>';
+    }).join('');
+    return '<section class="lane"><h3 class="'+key+'">'+title+'</h3>'+
+      (cards || '<p class="empty">'+(filter.valid ? empty : 'Completá los filtros.')+'</p>')+'</section>';
+  }).join('');
+  renderAnnual(filter);
+}
+
+function renderAnnual(filter) {
+  const chosen = catalog.filter(crop => favorites.has(crop.id));
+  $('print-year').disabled = !chosen.length || !filter.validRegion;
+  $('annual-summary').textContent = !filter.validRegion ? 'Elegí una región para ver el calendario anual.' :
+    regions[filter.region]+' · '+formatNumber.format(chosen.length)+(chosen.length === 1 ? ' cultivo marcado' : ' cultivos marcados');
+  $('annual-table').innerHTML = !filter.validRegion ? '' : !chosen.length ?
+    '<p class="empty">Todavía no marcaste cultivos. Elegí una tarjeta y tocá su estrella.</p>' :
+    '<table><thead><tr><th scope="col">Cultivo</th>'+months.map(month => '<th scope="col"><abbr title="'+month+'">'+month.slice(0,3)+'</abbr></th>').join('')+
+    '</tr></thead><tbody>'+chosen.map(crop => {
+      const dates = calendars[filter.region].get(crop.id);
+      return '<tr><th scope="row"><span class="print-only">'+crop.name+'</span><button type="button" data-crop="'+crop.id+'">'+crop.name+'</button> '+starredButton(crop)+'</th>'+
+        months.map((_,index) => {
+          const month = index+1;
+          return '<td><div class="bars">'+actions.map(({key,label}) => {
+            if (!dates[key].includes(month)) return '<span></span>';
+            const protect = isProtected(dates,month,key) ? ' · '+protectionLabel(dates,month,key) : '';
+            const activity = key === 's' ? ' · '+activityLabel(dates,month,key) : '';
+            return '<span class="bar '+key+'" title="'+label+activity+protect+'">'+key.toUpperCase()+(protect ? '✳' : '')+'</span>';
+          }).join('')+'</div></td>';
+        }).join('')+'</tr>';
+    }).join('')+'</tbody></table>';
+}
+
+function showCrop(id) {
+  const crop = catalog.find(item => item.id === id);
+  const filter = readFilters();
+  if (!crop || !filter.validRegion) return;
+  const dates = calendars[filter.region].get(id);
+  const list = (values,activity) => values.map(n => months[n-1]+(dates.needsProtection(n,activity) ? ' ✳' : '')).join(', ') || 'Sin ventana prevista';
+  const today = new Date();
+  const [first,last] = crop.days.map(days => formatDate.format(addDays(today,days)));
+  const todayMonth = today.getMonth()+1;
+  const sowToday = dates.s.includes(todayMonth);
+  const openAirToday = dates.direct.includes(todayMonth) && !dates.needsProtection(todayMonth,'direct');
+  const fields = [
+    ['Siembra directa',list(dates.direct,'direct')],['Siembra en almácigo',list(dates.seedbed,'seedbed')],
+    ['Trasplante',list(dates.t,'t')],['Cosecha o primer corte',list(dates.c,'c')],
+    ['Días desde la siembra',crop.days.join(' a ')+' días aprox.'],
+    ['Distancia entre plantas',crop.spacing.replace('-',' a ')+' cm'],
+    ['Profundidad',crop.depth === 'superficial' ? 'Superficial, con cobertura mínima' : crop.depth.replace('-',' a ')+' cm'],
+    ['Sol',crop.sun],['Riego',crop.water.charAt(0).toUpperCase()+crop.water.slice(1)+' · Reajustá según la humedad del suelo.'],
+    ['Asociación favorable',crop.companions],['Asociación desfavorable',crop.avoid],
+    ['Maceta',crop.pot ? 'Apta · '+formatNumber.format(crop.pot)+' L como mínimo'+(potDepth[crop.name] ? ' y '+potDepth[crop.name]+' cm de profundidad' : '') : 'Desaconsejada para esta guía']
+  ];
+  $('crop-title').textContent = crop.name;
+  $('crop-info').innerHTML = '<p class="muted">'+types[crop.type]+' · '+regions[filter.region]+'</p><p>'+crop.tip+'</p>'+
+    '<dl>'+fields.map(([label,value]) => '<dt>'+label+'</dt><dd>'+value+'</dd>').join('')+'</dl>'+
+    (['direct','seedbed','t','c'].some(key => dates[key].some(n => dates.needsProtection(n,key))) ? '<p>✳ Requiere invernadero o ambiente protegido.</p>' : '')+
+    '<p class="notice"><strong>Si sembrás hoy ('+formatDate.format(today)+')</strong><br>Primera cosecha estimada entre el '+first+' y el '+last+'. '+
+      (!sowToday ? 'Hoy queda fuera de la ventana recomendada para esta región. El cálculo es teórico.' :
+      !openAirToday && isProtected(dates,todayMonth,'s') ? 'La siembra de hoy requiere protección.' :
+      !dates.direct.includes(todayMonth) ? 'La siembra de hoy corresponde a almácigo.' : 'Hoy está dentro de la ventana de siembra directa.')+
+    '</p>'+starredButton(crop);
+  if (!$('crop-dialog').open) $('crop-dialog').showModal();
+}
+
+$('filters').addEventListener('submit',event => event.preventDefault());
+$('filters').addEventListener('change',render);
+$('all').addEventListener('click',() => {
+  checks.forEach(input => {input.checked = true;});
+  render();
+});
+$('example').addEventListener('click',fillExample);
+document.addEventListener('click',event => {
+  const star = event.target.closest('[data-star]');
+  if (star) {
+    const id = Number(star.dataset.star);
+    const isDialog = Boolean(star.closest('dialog'));
+    const isAnnual = Boolean(star.closest('.annual'));
+    const lane = star.closest('.lane');
+    if (favorites.has(id)) favorites.delete(id);
+    else favorites.add(id);
+    render();
+    if (isDialog) showCrop(id);
+    const scope = isDialog ? $('crop-dialog') : isAnnual ? document.querySelector('.annual') :
+      [...$('columns').children].find(section => section.firstElementChild.textContent === lane?.firstElementChild.textContent);
+    (scope?.querySelector('[data-star="'+id+'"]') || (isAnnual ? $('annual-table') : null))?.focus();
+    return;
+  }
+  const detail = event.target.closest('[data-crop]');
+  if (detail) showCrop(Number(detail.dataset.crop));
+});
+function printCalendar(mode) {
+  document.body.dataset.print = mode;
+  window.print();
+}
+window.addEventListener('afterprint',() => {delete document.body.dataset.print;});
+$('print-month').addEventListener('click',() => printCalendar('month'));
+$('print-year').addEventListener('click',() => printCalendar('annual'));
+fillExample();
+</script>
+</body>
+</html>
